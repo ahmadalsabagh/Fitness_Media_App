@@ -23,5 +23,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(switchActivity);
             }
         });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switchActivity = new Intent(MainActivity.this,AccountSettings.class);
+                startActivity(switchActivity);
+            }
+        });
     }
 }

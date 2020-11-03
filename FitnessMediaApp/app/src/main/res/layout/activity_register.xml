@@ -10,7 +10,7 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_marginTop="100dp"
-        android:text="First Name:"
+        android:text="@string/first_name"
         android:textSize="20sp" />
 
     <EditText
@@ -18,51 +18,55 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/sampleFirstName"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/lastNameLabel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Last Name:"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/last_name"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/lastNameTxt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/sampleLastName"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/usernameLabel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Username:"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:text="@string/username"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/usernameTxt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/sampleUsername"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/passwordLabel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Password:"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/password"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/passwordTxt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/samplePassword"
         android:inputType="textPassword" />
 
     <Button
@@ -70,6 +74,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Register" />
+        android:text="@string/register" />
 
 </LinearLayout>

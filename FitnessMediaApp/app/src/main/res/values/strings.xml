@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Fitness Media App</string>
+    <string name="password">Password:</string>
+    <string name="first_name">First Name:</string>
+    <string name="last_name">Last Name:</string>
+    <string name="clear">Clear</string>
+    <string name="account">Account</string>
+    <string name="posts">Posts</string>
+    <string name="exercise_list">Exercise List</string>
+    <string name="step_count">Step Count</string>
+    <string name="update">Update</string>
+    <string name="username">Username:</string>
+    <string name="sampleUsername">JSmith123</string>
+    <string name="samplePassword">*********</string>
+    <string name="sampleLastName">Smith</string>
+    <string name="sampleFirstName">John</string>
+    <string name="register">Register</string>
 </resources>
