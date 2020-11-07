@@ -6,6 +6,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/registrationLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registration:" />
+
+    <TextView
         android:id="@+id/firstNameLabel"
         android:layout_width="300dp"
         android:layout_height="30dp"
@@ -38,7 +44,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/usernameLabel"
+        android:id="@+id/userNameLabel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -46,7 +52,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/usernameTxt"
+        android:id="@+id/userNameTxt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
