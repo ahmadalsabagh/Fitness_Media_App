@@ -37,40 +37,41 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final Map<String, Object> user = new HashMap<>();
-        final EditText firstName = findViewById(R.id.firstNameTxt);
-        final EditText lastName = findViewById(R.id.lastNameTxt);
-        final EditText userName = findViewById(R.id.userNameTxt);
-        final EditText password = findViewById(R.id.passwordTxt);
-        Button btnRegister = findViewById(R.id.registerBtn);
+        final EditText firstName = findViewById(R.id.newFirstNameTxt);
+        final EditText lastName = findViewById(R.id.newLastNameTxt);
+        final EditText userName = findViewById(R.id.newUsernameTxt);
+        final EditText password = findViewById(R.id.newPasswordTxt);
+        Button updateUser = findViewById(R.id.createUserBtn);
 
-//        btnRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                lastNameString = lastName.getText().toString();
-//                firstNameString = firstName.getText().toString();
-//                userNameString = userName.getText().toString();
-//                passwordString = password.getText().toString();
-//                user.put(FirstN_Key, firstNameString);
-//                user.put(LastN_Key, lastNameString);
-//                user.put(UserN_Key, userNameString);
-//                user.put(Password_Key, passwordString);
-//
-//                db.collection("users")
-//                        .add(user)
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Log.d(TAG, "Document added with ID" + documentReference.getId());
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error adding document", e);
-//                            }
-//                        });
-//            }
-//        });
+        updateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lastNameString = lastName.getText().toString();
+                firstNameString = firstName.getText().toString();
+                userNameString = userName.getText().toString();
+                passwordString = password.getText().toString();
+                user.put(FirstN_Key, firstNameString);
+                user.put(LastN_Key, lastNameString);
+                user.put(UserN_Key, userNameString);
+                user.put(Password_Key, passwordString);
+
+                db.collection("users")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "Document added with ID" + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+            }
+        });
+
 
 //         Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
