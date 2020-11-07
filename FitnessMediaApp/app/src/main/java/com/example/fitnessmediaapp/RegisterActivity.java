@@ -37,13 +37,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final Map<String, Object> user = new HashMap<>();
-        final EditText firstName = findViewById(R.id.newFirstNameTxt);
-        final EditText lastName = findViewById(R.id.newLastNameTxt);
-        final EditText userName = findViewById(R.id.newUsernameTxt);
-        final EditText password = findViewById(R.id.newPasswordTxt);
-        Button updateUser = findViewById(R.id.createUserBtn);
+        final EditText firstName = findViewById(R.id.firstNameTxt);
+        final EditText lastName = findViewById(R.id.lastNameTxt);
+        final EditText userName = findViewById(R.id.userNameTxt);
+        final EditText password = findViewById(R.id.passwordTxt);
+        Button btnRegisterUser = findViewById(R.id.createUserBtn);
 
-        updateUser.setOnClickListener(new View.OnClickListener() {
+        btnRegisterUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 lastNameString = lastName.getText().toString();
