@@ -38,10 +38,10 @@ public class AccountSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         final Map<String, Object> user = new HashMap<>();
-        final EditText firstName = findViewById(R.id.firstNameTxt);
-        final EditText lastName = findViewById(R.id.lastNameTxt);
-        final EditText userName = findViewById(R.id.userNameTxt);
-        final EditText password = findViewById(R.id.passwordTxt);
+        final EditText firstName = findViewById(R.id.newFirstNameTxt);
+        final EditText lastName = findViewById(R.id.newLastNameTxt);
+        final EditText userName = findViewById(R.id.newUsernameTxt);
+        final EditText password = findViewById(R.id.newPasswordTxt);
         Button btnRegister = findViewById(R.id.updateUserBtn);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
