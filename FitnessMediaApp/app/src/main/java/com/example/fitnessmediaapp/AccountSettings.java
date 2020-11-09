@@ -26,7 +26,7 @@ public class AccountSettings extends AppCompatActivity {
     public static final String LastN_Key = "lastName";
     public static final String UserN_Key = "username";
     public static final String Password_Key = "password";
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//    FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static String firstNameString;
     public static String lastNameString;
     public static String userNameString;
@@ -51,25 +51,30 @@ public class AccountSettings extends AppCompatActivity {
                 firstNameString = firstName.getText().toString();
                 userNameString = userName.getText().toString();
                 passwordString = password.getText().toString();
-                user.put(FirstN_Key, firstNameString);
-                user.put(LastN_Key, lastNameString);
-                user.put(UserN_Key, userNameString);
-                user.put(Password_Key, passwordString);
 
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                DocumentReference docRef = FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .document("wKmyn526EBQp6IFwusZP");
+
+                Map<String, Object> myMap = new HashMap<>();
+                myMap.put(LastN_Key, lastNameString);
+                myMap.put(FirstN_Key, firstNameString);
+                myMap.put(UserN_Key, userNameString);
+                myMap.put(Password_Key, passwordString);
+                docRef.update(myMap)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "Document added with ID" + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "onSuccess: document was updated");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
+                                Log.e(TAG, "onFailure: ", e);
                             }
                         });
+
             }
         });
     }
