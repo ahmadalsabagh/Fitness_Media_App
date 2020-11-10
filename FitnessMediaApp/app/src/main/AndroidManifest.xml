@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- Activities -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".OpeningScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,10 +19,10 @@
         
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".OpeningScreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.fitnessmediaapp.MainActivity"/>
+                android:value="com.example.fitnessmediaapp.OpeningScreen"/>
         </activity>
 
         <activity
