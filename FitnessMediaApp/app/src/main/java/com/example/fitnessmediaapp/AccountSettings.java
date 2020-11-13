@@ -1,5 +1,6 @@
 package com.example.fitnessmediaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,9 +80,27 @@ public class AccountSettings extends AppCompatActivity {
         });
     }
 
-        //Test onclick for the 'steps' navigation bar button
-    public void test(View v){
-        Toast toast=Toast. makeText(getApplicationContext(),"Hello Javatpoint",Toast. LENGTH_SHORT);
-        toast.show();
+    //Onclick functions for the menu bar
+    public void goToStepCount(View v){
+        Intent intent = new Intent(this, StepCounter.class);
+        startActivity(intent);
+    }
+
+    //Onclick functions for the menu bar
+    public void goToExerciseList(View v){
+        Intent intent = new Intent(this, ExerciseListMain.class);
+        startActivity(intent);
+    }
+
+    //Onclick functions for the menu bar
+    public void goToPosts(View v){
+        Intent intent = new Intent(this, Posts.class);
+        startActivity(intent);
+    }
+
+    //Onclick functions for the menu bar
+    public void goToAccountSettings(View v){
+       Intent intent = new Intent(this, AccountSettings.class);
+       startActivity(intent);
     }
 }

@@ -28,7 +28,7 @@ public class OpeningScreen extends AppCompatActivity  {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent switchActivity = new Intent(OpeningScreen.this,AccountSettings.class);
+                Intent switchActivity = new Intent(OpeningScreen.this,LoginActivity.class);
                 startActivity(switchActivity);
             }
         });

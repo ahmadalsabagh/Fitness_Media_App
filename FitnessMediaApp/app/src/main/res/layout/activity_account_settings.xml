@@ -116,6 +116,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="#FAFAFA"
+                    android:onClick="goToStepCount"
                     android:scaleType="centerInside"
                     android:src="@drawable/running" />
 
@@ -125,6 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#FAFAFA"
+                    android:onClick="goToExerciseList"
                     android:scaleType="centerInside"
                     android:src="@drawable/list" />
 
@@ -134,6 +136,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#FAFAFA"
+                    android:onClick="goToPosts"
                     android:scaleType="centerInside"
                     android:src="@drawable/social" />
 
@@ -144,6 +147,7 @@
                     android:layout_weight="1"
                     android:background="#FAFAFA"
                     android:baselineAlignBottom="false"
+                    android:onClick="goToAccountSettings"
                     android:scaleType="centerInside"
                     android:src="@drawable/profile" />
             </TableRow>
@@ -160,7 +164,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_horizontal"
-                    android:onClick="test"
+                    android:onClick="goToStepCount"
                     android:text="@string/step_count" />
 
                 <TextView
@@ -171,6 +175,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_horizontal"
+                    android:onClick="goToExerciseList"
                     android:text="@string/exercise_list" />
 
                 <TextView
@@ -181,6 +186,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_horizontal"
+                    android:onClick="goToPosts"
                     android:text="@string/posts" />
 
                 <TextView
@@ -192,6 +198,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="false"
                     android:gravity="center_horizontal"
+                    android:onClick="goToAccountSettings"
                     android:screenReaderFocusable="false"
                     android:text="@string/account" />
             </TableRow>
