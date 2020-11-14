@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".Posts">
+            android:name=".PostsActivity">
         </activity>
 
         <!--<activity

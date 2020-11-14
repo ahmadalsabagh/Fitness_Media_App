@@ -24,7 +24,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     @NonNull
     @Override
     public PostsAdapter.PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.network_post_item,
+        View mItemView = mInflater.inflate(R.layout.posts_item,
                 parent, false);
         return new PostsViewHolder(mItemView, this);
     }
@@ -49,7 +49,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         final PostsAdapter mAdapter;
         public PostsViewHolder(View itemView, PostsAdapter adapter) {
             super(itemView);
-            postsItemView = itemView.findViewById(R.id.post_item);
+            postsItemView = itemView.findViewById(R.id.txtDummy1);
             this.mAdapter = adapter;
 
         }
