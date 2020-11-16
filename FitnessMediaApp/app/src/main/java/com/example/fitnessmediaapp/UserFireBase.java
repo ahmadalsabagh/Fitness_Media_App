@@ -1,19 +1,19 @@
 package com.example.fitnessmediaapp;
 
-public class User {
+public class UserFireBase {
     private String firstName;
     private String lastName;
     private String password;
     private String username;
 
-    public User(String firstName, String lastName, String password, String username) {
+    public UserFireBase(String firstName, String lastName, String password, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.username = username;
     }
 
-    public User(){
+    public UserFireBase(){
         //empty constructor to comply with firebase settings
     }
 

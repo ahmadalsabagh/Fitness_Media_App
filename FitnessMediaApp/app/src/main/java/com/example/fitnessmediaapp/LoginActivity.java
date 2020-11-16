@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final LinkedList<User> mUsersList = new LinkedList<>();
+    private final LinkedList<UserFireBase> mUsersList = new LinkedList<>();
 
     private static final String TAG = "LoginActivity";
     public static String userNameString;
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                         passwordFromDatabase = x.getString("password");
                                         usernameFromDatabase = x.getString("username");
 
-                                        User userData = new User(firstNameFromDatabase, lastNameFromDatabase, passwordFromDatabase, usernameFromDatabase);
+                                        UserFireBase userData = new UserFireBase(firstNameFromDatabase, lastNameFromDatabase, passwordFromDatabase, usernameFromDatabase);
 
                                         mUsersList.addLast(userData);
                                     }
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.e(TAG, "onEvent: query snapshot was null");
                                 }
 
-                                for (User x: mUsersList){
+                                for (UserFireBase x: mUsersList){
                                     if(x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)){
                                         authenticated = true;
                                     }

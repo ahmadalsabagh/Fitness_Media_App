@@ -8,7 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity(indices = {@Index(value = {"username"},
+@Entity(indices = {@Index(value = {"Username"},
         unique = true)}, tableName = "Users") //CHANGE TABLE NAME & verify username column matches
 public class UserEntity {
 
@@ -32,7 +32,7 @@ public class UserEntity {
     @ColumnInfo(name = "Password")
     private String password;
 
-    @Ignore
+
     public UserEntity(int id, @NonNull String username, @NonNull String firstName, @NonNull String lastName, @NonNull String password){
         this.id = id;
         this.firstName = firstName;
@@ -83,6 +83,8 @@ public class UserEntity {
         }
         return true;
     }
+
+    public String getPassword(){return this.password;}
 
 
 
