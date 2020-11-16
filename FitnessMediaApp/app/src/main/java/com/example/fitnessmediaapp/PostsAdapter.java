@@ -60,6 +60,5 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             this.mAdapter = adapter;
 
         }
-
     }
 }
