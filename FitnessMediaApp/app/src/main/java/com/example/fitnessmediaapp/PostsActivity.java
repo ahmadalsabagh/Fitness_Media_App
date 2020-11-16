@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PostsActivity extends AppCompatActivity {
-    private final LinkedList<String> mPostsList = new LinkedList<>();
+    private final LinkedList<Post> mPostsList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private PostsAdapter mAdapter;
 //    private TextView textViewData;
@@ -35,7 +35,10 @@ public class PostsActivity extends AppCompatActivity {
 //    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 //    private DocumentReference postRef = db.document("posts/myPost");
     private static final String TAG = "PostsActivity";
-    public static String postData;
+    public static String postContent;
+    public static String postLocation;
+    public static String postTime;
+    public static String postUsername;
 
 //
 //    @Override
@@ -75,7 +78,14 @@ public class PostsActivity extends AppCompatActivity {
                         if(queryDocumentData != null){
                             List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
                             for(DocumentSnapshot x : snapshotList){
-                                Log.d(TAG, "onEvent: " + x.getData());
+                                postContent = x.getString("content");
+                                postLocation = x.getString("location");
+                                postTime = x.getString("time");
+                                postUsername = x.getString("username");
+
+                                Post postData = new Post(postContent, postLocation, postTime, postUsername);
+
+                                mPostsList.addLast(postData);
                             }
                         } else{
                             Log.e(TAG, "onEvent: query snapshot was null");
@@ -87,7 +97,7 @@ public class PostsActivity extends AppCompatActivity {
 
 //        Provides dummy data to linked list
 //        for (int i = 0; i < 30; i++) {
-//            mPostsList.addLast(postData);
+//
 //        }
 
         mRecyclerView = findViewById(R.id.recyclerView);
