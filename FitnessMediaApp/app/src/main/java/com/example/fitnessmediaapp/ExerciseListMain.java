@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -62,7 +61,7 @@ public class ExerciseListMain extends AppCompatActivity {
 
     //Onclick functions for the menu bar
     public void goToPosts(View v){
-        Intent intent = new Intent(this, Posts.class);
+        Intent intent = new Intent(this, PostsActivity.class);
         startActivity(intent);
     }
 

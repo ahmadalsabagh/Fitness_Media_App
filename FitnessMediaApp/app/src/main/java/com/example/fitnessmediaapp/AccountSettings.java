@@ -6,10 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -94,7 +92,7 @@ public class AccountSettings extends AppCompatActivity {
 
     //Onclick functions for the menu bar
     public void goToPosts(View v){
-        Intent intent = new Intent(this, Posts.class);
+        Intent intent = new Intent(this, PostsActivity.class);
         startActivity(intent);
     }
 

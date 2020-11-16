@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder>  {
-    private final LinkedList<String> mPostsList;
+    private final LinkedList<Post> mPostsList;
     private LayoutInflater mInflater;
 
-    public PostsAdapter(Context context, LinkedList<String> postsList) {
+    public PostsAdapter(Context context, LinkedList<Post> postsList) {
 
         mInflater = LayoutInflater.from(context);
         this.mPostsList = postsList;
@@ -24,15 +24,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     @NonNull
     @Override
     public PostsAdapter.PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.network_post_item,
+        View mItemView = mInflater.inflate(R.layout.posts_item,
                 parent, false);
         return new PostsViewHolder(mItemView, this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostsAdapter.PostsViewHolder holder, int position) {
-        String mCurrent = mPostsList.get(position);
-        holder.postsItemView.setText(mCurrent);
+        Post mCurrent = mPostsList.get(position);
+        holder.postContentView.setText(mCurrent.getContent());
+        holder.postLocationView.setText("location: " + mCurrent.getLocation());
+        holder.postTimeView.setText("time: " + mCurrent.getTime());
+
     }
 
     @Override
@@ -45,14 +48,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     }
 
     public class PostsViewHolder extends RecyclerView.ViewHolder{
-        public final TextView postsItemView;
+        public final TextView postContentView;
+        public final TextView postTimeView;
+        public final TextView postLocationView;
         final PostsAdapter mAdapter;
         public PostsViewHolder(View itemView, PostsAdapter adapter) {
             super(itemView);
-            postsItemView = itemView.findViewById(R.id.post_item);
+            postContentView = itemView.findViewById(R.id.txtContent);
+            postTimeView = itemView.findViewById(R.id.txtTime);
+            postLocationView = itemView.findViewById(R.id.txtLocation);
             this.mAdapter = adapter;
 
         }
-
     }
 }

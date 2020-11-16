@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StepCounter extends AppCompatActivity {
@@ -28,7 +27,7 @@ public class StepCounter extends AppCompatActivity {
 
     //Onclick functions for the menu bar
     public void goToPosts(View v){
-        Intent intent = new Intent(this, Posts.class);
+        Intent intent = new Intent(this, PostsActivity.class);
         startActivity(intent);
     }
 
