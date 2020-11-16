@@ -9,26 +9,27 @@ import androidx.room.PrimaryKey;
 
 
 @Entity(indices = {@Index(value = {"username"},
-        unique = true)}, tableName = "s") //CHANGE TABLE NAME & verify username column matches
+        unique = true)}, tableName = "Users") //CHANGE TABLE NAME & verify username column matches
 public class UserEntity {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ID")
     private int id;
 
     @NonNull
-    @ColumnInfo(name = "s") //CHANGE!
+    @ColumnInfo(name = "Username")
     private String username;
 
     @NonNull
-    @ColumnInfo(name = "s") //CHANGE!
+    @ColumnInfo(name = "FirstName")
     private String firstName;
 
     @NonNull
-    @ColumnInfo(name = "s") //CHANGE!
+    @ColumnInfo(name = "LastName")
     private String lastName;
 
     @NonNull
-    @ColumnInfo(name = "s") //CHANGE!
+    @ColumnInfo(name = "Password")
     private String password;
 
     @Ignore
