@@ -27,11 +27,15 @@
                 android:id="@+id/createPostBtn"
                 android:layout_width="85dp"
                 android:layout_height="47dp"
-                android:layout_marginBottom="40dp"
-                android:onClick="uploadPost"
+                android:layout_marginStart="160dp"
+                android:layout_marginLeft="160dp"
+                android:layout_marginEnd="166dp"
+                android:layout_marginRight="166dp"
+                android:layout_marginBottom="44dp"
                 android:text="Post"
                 app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
-                app:layout_constraintStart_toEndOf="@+id/txtPostContent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TableLayout
                 android:id="@+id/tableLayout3"
@@ -138,18 +142,6 @@
                 </TableRow>
             </TableLayout>
 
-            <EditText
-                android:id="@+id/txtPostContent"
-                android:layout_width="wrap_content"
-                android:layout_height="47dp"
-                android:layout_marginBottom="40dp"
-                android:ems="10"
-                android:hint="Motivate Others"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.278"
-                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </RelativeLayout>
