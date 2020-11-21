@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtContent"
+        android:id="@+id/txtPostContent"
         android:layout_width="263dp"
         android:layout_height="34dp"
         android:layout_marginStart="92dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/txtTime"
+        android:id="@+id/txtPostTime"
         android:layout_width="91dp"
         android:layout_height="23dp"
         android:layout_marginStart="110dp"
@@ -37,12 +37,12 @@
         android:textColor="#3E3C3C"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txtLocation"
+        app:layout_constraintEnd_toStartOf="@+id/txtPostLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPostContent" />
 
     <TextView
-        android:id="@+id/txtLocation"
+        android:id="@+id/txtPostLocation"
         android:layout_width="130dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
@@ -56,7 +56,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtTime"
-        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+        app:layout_constraintStart_toEndOf="@+id/txtPostTime"
+        app:layout_constraintTop_toBottomOf="@+id/txtPostContent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
