@@ -248,7 +248,7 @@ public class PostsActivity extends AppCompatActivity {
             if (addresses.size() > 0) {
                 String countryName = addresses.get(0).getCountryName();
 
-                //Set location textview to countryName
+                //Set location textview to countryName!!!
                 Toast.makeText(this, countryName, Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){

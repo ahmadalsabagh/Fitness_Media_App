@@ -34,6 +34,18 @@ public class ExerciseListMain extends AppCompatActivity {
         mDescriptionList.add("An exercise that focuses on the rear delts");
         mImageList.add(R.drawable.bla);
 
+        mExerciseList.add("Shoulder press");
+        mDescriptionList.add("An exercise that focuses on the front delts");
+        mImageList.add(R.drawable.bla);
+
+        mExerciseList.add("Lateral raises");
+        mDescriptionList.add("An exercise that focuses on the side delts");
+        mImageList.add(R.drawable.bla);
+
+        mExerciseList.add("Front raises");
+        mDescriptionList.add("An exercise that focuses on the front delts");
+        mImageList.add(R.drawable.bla);
+
 
 
         // Get a handle to the RecyclerView.
