@@ -6,9 +6,10 @@
     android:layout_height="wrap_content">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerViewPosts"
         android:layout_width="match_parent"
-        android:layout_height="420dp">
+        android:layout_height="420dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 

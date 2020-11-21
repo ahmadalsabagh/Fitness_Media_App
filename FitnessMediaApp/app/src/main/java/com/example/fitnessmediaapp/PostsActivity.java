@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
@@ -30,63 +32,14 @@ import java.util.List;
 import java.util.Map;
 
 public class PostsActivity extends AppCompatActivity {
-    private final LinkedList<Post> mPostsList = new LinkedList<>();
-    private RecyclerView mRecyclerView;
-    private PostsAdapter mAdapter;
-//    private TextView textViewData;
-    public static final String Key = "post";
 
-//    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    private DocumentReference postRef = db.document("posts/myPost");
-    private static final String TAG = "PostsActivity";
-    public static String postContent;
-    public static String postLocation;
-    public static String postTime;
-    public static String postUsername;
-    public static String postContentString;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    public static String toast_message = "heloooooooooooo";
-    //Registering the listener
-    private ListenerRegistration snapShotActivationController;
-
+    RecyclerView recyclerView;
+    PostsAdapter postsRecyclerViewAdapter;
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        snapShotActivationController = FirebaseFirestore.getInstance()
-                .collection("posts")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentData, @Nullable FirebaseFirestoreException error) {
-                        if(error != null){
-                            Log.e(TAG, "onEvent: ", error);
-                            return;
-                        }
-                        if(queryDocumentData != null){
-                            List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
-                            for(DocumentSnapshot x : snapshotList){
-                                postContent = x.getString("content");
-                                postLocation = x.getString("location");
-                                postTime = x.getString("time");
-                                postUsername = x.getString("username");
-
-                                Post postData = new Post(postContent, postLocation, postTime, postUsername);
-
-                                mPostsList.addLast(postData);
-                            }
-                        } else{
-                            Log.e(TAG, "onEvent: query snapshot was null");
-                        }
-                    }
-                });
-
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new PostsAdapter(this, mPostsList);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
+        initRecyclerView();
     }
 
 
@@ -95,71 +48,59 @@ public class PostsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posts_recyclerview);
-
-//        FirebaseFirestore.getInstance()
-//                .collection("posts")
-//                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onEvent(@Nullable QuerySnapshot queryDocumentData, @Nullable FirebaseFirestoreException error) {
-//                        if(error != null){
-//                            Log.e(TAG, "onEvent: ", error);
-//                            return;
-//                        }
-//                        if(queryDocumentData != null){
-//                            List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
-//                            for(DocumentSnapshot x : snapshotList){
-//                                postContent = x.getString("content");
-//                                postLocation = x.getString("location");
-//                                postTime = x.getString("time");
-//                                postUsername = x.getString("username");
-//
-//                                Post postData = new Post(postContent, postLocation, postTime, postUsername);
-//
-//                                mPostsList.addLast(postData);
-//                            }
-//                        } else{
-//                            Log.e(TAG, "onEvent: query snapshot was null");
-//                        }
-//                    }
-//                });
-
-
-
-//        Provides dummy data to linked list
-//        for (int i = 0; i < 30; i++) {
-//
-//        }
-
-
+        recyclerView = findViewById(R.id.recyclerViewPosts);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        if(postsRecyclerViewAdapter != null){
+            postsRecyclerViewAdapter.stopListening();
+        }
 //        snapShotActivationController.remove();
     }
 
     //----------ONCLICK for uploading posts
     public void uploadPost(View v){
-        final Map<String, Object> posts = new HashMap<>();
-        final EditText postContent = findViewById(R.id.txtPostContent);
-        postContentString = postContent.getText().toString();
-        posts.put("content", postContentString);
+//        final Map<String, Object> posts = new HashMap<>();
+//        final EditText postContent = findViewById(R.id.txtPostContent);
+//        postContentString = postContent.getText().toString();
+//        posts.put("content", postContentString);
+//
+//        db.collection("posts")
+//                .add(posts)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d(TAG, "Document added with ID" + documentReference.getId());
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error adding document", e);
+//                    }
+//                });
+    }
 
-        db.collection("posts")
-                .add(posts)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Document added with ID" + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+    private void initRecyclerView(){
+
+        Query query = FirebaseFirestore.getInstance()
+                .collection("posts");
+
+        FirestoreRecyclerOptions<Post> options = new FirestoreRecyclerOptions.Builder<Post>()
+                .setQuery(query, Post.class)
+                .build();
+
+        postsRecyclerViewAdapter = new PostsAdapter(options);
+        recyclerView.setAdapter(postsRecyclerViewAdapter);
+
+        postsRecyclerViewAdapter.startListening();
+
+
+
+
+
     }
 
     //Onclick functions for the menu bar
