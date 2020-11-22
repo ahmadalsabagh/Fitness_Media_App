@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- Activities -->
-        <activity android:name=".StepCounter"> <!-- This is supposed to be .OpeningScreen -->
+        <activity android:name=".OpeningScreen"> <!-- This is supposed to be .OpeningScreen -->
                                                 <!--  Use ".StepCounter" for testing          -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,9 +36,9 @@
             android:name=".PostsActivity">
         </activity>
 
-        <!--<activity
+        <activity
             android:name=".StepCounter">
-        </activity>-->
+        </activity>
 
         <activity
             android:name=".ExerciseListMain">
