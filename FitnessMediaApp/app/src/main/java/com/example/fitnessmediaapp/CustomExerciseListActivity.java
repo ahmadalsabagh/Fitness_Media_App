@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.location.LocationServices;
+//import com.google.android.gms.location.LocationServices;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -28,17 +28,18 @@ public class CustomExerciseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customexercise_recyclerview);
         recyclerView = findViewById(R.id.recyclerViewCustomList);
+        System.out.println("inside of CustomExerciseList");
         //Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Custom Exercise List");  // provide compatibility to all the versions
-        }
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setTitle("Custom Exercise List");  // provide compatibility to all the versions
+//        }
     }
 
     private void initRecyclerView(){
         Query query = FirebaseFirestore.getInstance()
-                .collection("custom list");
+                .collection("customExerciseList");
 
         FirestoreRecyclerOptions<CustomExerciseList> options = new FirestoreRecyclerOptions.Builder<CustomExerciseList>()
                 .setQuery(query, CustomExerciseList.class)
@@ -47,7 +48,5 @@ public class CustomExerciseListActivity extends AppCompatActivity {
         viewAdapter = new CustomExerciseListAdapter(options);
         recyclerView.setAdapter(viewAdapter);
         viewAdapter.startListening();
-
     }
-
 }

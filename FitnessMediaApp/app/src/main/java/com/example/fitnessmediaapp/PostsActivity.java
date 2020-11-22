@@ -83,7 +83,7 @@ public class PostsActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getCoordinates();
+                getCoordinates();
                 showAlertDialog();
 //                final Map<String, Object> posts = new HashMap<>();
 //                TextView postContentToUpload = findViewById(R.id.txtPostContent);
@@ -246,6 +246,7 @@ public class PostsActivity extends AppCompatActivity {
 
                 //Set location textview to countryName!!!
                 Toast.makeText(this, countryName, Toast.LENGTH_LONG).show();
+                System.out.println(countryName);
             }
         }catch (Exception e){
             Toast.makeText(this, "No Location Name Found", Toast.LENGTH_LONG).show();
