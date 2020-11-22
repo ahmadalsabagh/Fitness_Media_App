@@ -128,3 +128,4 @@ public class LoginActivity extends AppCompatActivity {
         userSnapshotListener.remove();
     }
 }
+

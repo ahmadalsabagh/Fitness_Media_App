@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_box_custom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <ImageView
+        android:id="@+id/custom_exerciseIconImg"
+        android:layout_width="108dp"
+        android:layout_height="76dp"
+        tools:srcCompat="@drawable/barbell" />
+
+    <TextView
+        android:id="@+id/custom_word"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="0dp"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/removeExerciseBtn"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_weight="0"
+        android:text="Remove" />
+
+</LinearLayout>
