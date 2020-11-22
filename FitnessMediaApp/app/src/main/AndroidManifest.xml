@@ -53,6 +53,14 @@
         </activity>
 
         <activity
+            android:name=".CustomExerciseListActivity"
+            android:parentActivityName=".ExerciseListMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fitnessmediaapp.ExerciseListMain"/>
+        </activity>
+
+        <activity
             android:name=".LoginActivity"
             android:parentActivityName=".OpeningScreen">
             <meta-data

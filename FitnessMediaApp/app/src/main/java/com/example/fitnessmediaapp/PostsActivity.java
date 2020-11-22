@@ -190,10 +190,6 @@ public class PostsActivity extends AppCompatActivity {
 
         postsRecyclerViewAdapter.startListening();
 
-
-
-
-
     }
 
     //Onclick functions for the menu bar

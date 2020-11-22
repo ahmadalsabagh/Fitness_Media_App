@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -21,6 +23,8 @@ public class ExerciseListMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_list_recyclerview);
+        Button showList = findViewById(R.id.goToCustomList);
+
 
         mExerciseList.add("Dumbbell Fly");
         mDescriptionList.add("An exercise that focuses on the chest");
@@ -56,6 +60,14 @@ public class ExerciseListMain extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        showList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ExerciseListMain.this, CustomExerciseListActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
