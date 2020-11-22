@@ -41,6 +41,7 @@ public class PostsActivity extends AppCompatActivity {
 
 
 
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 //    private DocumentReference postRef = db.document("posts/myPost");
     private static final String TAG = "PostsActivity";

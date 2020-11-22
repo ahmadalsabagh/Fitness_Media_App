@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!-- Activities -->
-        <activity android:name=".StepCounter"> <!-- This is supposed to be .OpeningScreen -->
+        <activity android:name=".OpeningScreen"> <!-- This is supposed to be .OpeningScreen -->
                                                 <!--  Use ".StepCounter" for testing          -->
                                                 <!--      HomeActivity for testing      -->
             <intent-filter>
