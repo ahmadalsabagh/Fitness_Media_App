@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview2"
+        android:id="@+id/recyclerViewCustomList"
         android:layout_width="match_parent"
-        android:layout_height="445dp" />
+        android:layout_height="550dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,17 +20,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="443dp">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
+
             <TableLayout
-                android:id="@+id/tableLayout2"
+                android:id="@+id/tableLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="81dp"
                 android:baselineAligned="true"
@@ -131,19 +129,7 @@
                 </TableRow>
             </TableLayout>
 
-            <Button
-                android:id="@+id/goToCustomList"
-                android:layout_width="wrap_content"
-                android:layout_height="47dp"
-                android:layout_marginBottom="28dp"
-                android:text="Go To Custom List"
-                app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
 

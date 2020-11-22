@@ -1,7 +1,13 @@
 package com.example.fitnessmediaapp;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,6 +40,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class PostsActivity extends AppCompatActivity {
@@ -52,11 +61,13 @@ public class PostsActivity extends AppCompatActivity {
     //    public static String toast_message = "heloooooooooooo";
     //Registering the listener
     private ListenerRegistration snapShotActivationController;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onStart() {
         super.onStart();
         initRecyclerView();
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
 
@@ -72,6 +83,7 @@ public class PostsActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getCoordinates();
                 showAlertDialog();
 //                final Map<String, Object> posts = new HashMap<>();
 //                TextView postContentToUpload = findViewById(R.id.txtPostContent);
@@ -178,10 +190,6 @@ public class PostsActivity extends AppCompatActivity {
 
         postsRecyclerViewAdapter.startListening();
 
-
-
-
-
     }
 
     //Onclick functions for the menu bar
@@ -207,4 +215,41 @@ public class PostsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AccountSettings.class);
         startActivity(intent);
     }
+
+    public void getCoordinates(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                //get location
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>(){
+                    public void onSuccess(Location location){
+                        if(location != null){
+
+                            Double lat = location.getLatitude();
+                            Double lon = location.getLongitude();
+                            getLocationFromCoordinates(lat,lon);
+                        }
+                    }
+                });
+            }else{
+                requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1);
+            }
+        }
+    }
+
+    public void getLocationFromCoordinates(Double lat, Double lon){
+        try {
+            Geocoder gcd = new Geocoder(this.getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+
+            if (addresses.size() > 0) {
+                String countryName = addresses.get(0).getCountryName();
+
+                //Set location textview to countryName!!!
+                Toast.makeText(this, countryName, Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "No Location Name Found", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

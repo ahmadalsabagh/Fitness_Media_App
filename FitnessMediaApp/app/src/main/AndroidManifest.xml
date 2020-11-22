@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fitnessmediaapp">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,6 +46,14 @@
 
         <activity
             android:name=".ExerciseListActivity"
+            android:parentActivityName=".ExerciseListMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.fitnessmediaapp.ExerciseListMain"/>
+        </activity>
+
+        <activity
+            android:name=".CustomExerciseListActivity"
             android:parentActivityName=".ExerciseListMain">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
