@@ -25,6 +25,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="#FAFAFA"
+                android:onClick="goToStepCount"
                 android:scaleType="centerInside"
                 android:src="@drawable/running" />
 
@@ -34,6 +35,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#FAFAFA"
+                android:onClick="goToExerciseList"
                 android:scaleType="centerInside"
                 android:src="@drawable/list" />
 
@@ -43,6 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#FAFAFA"
+                android:onClick="goToPosts"
                 android:scaleType="centerInside"
                 android:src="@drawable/social" />
 
@@ -53,6 +56,7 @@
                 android:layout_weight="1"
                 android:background="#FAFAFA"
                 android:baselineAlignBottom="false"
+                android:onClick="goToAccountSettings"
                 android:scaleType="centerInside"
                 android:src="@drawable/profile" />
         </TableRow>
@@ -110,33 +114,48 @@
         android:id="@+id/welcomeHeaderTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="143dp"
+        android:layout_marginLeft="143dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginRight="143dp"
         android:text="Welcome"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659"
-        tools:layout_editor_absoluteX="143dp" />
+        app:layout_constraintVertical_bias="0.659" />
 
     <ImageView
         android:id="@+id/welcomeImg"
         android:layout_width="371dp"
         android:layout_height="380dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392"
-        app:srcCompat="@drawable/barbell"
-        tools:layout_editor_absoluteX="20dp" />
+        app:srcCompat="@drawable/barbell" />
 
     <TextView
         android:id="@+id/welcomeTxt"
         android:layout_width="328dp"
         android:layout_height="74dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="41dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
         android:layout_marginBottom="72dp"
         android:text="Click on the icons below to explore the ways that Fitness Media Hub can help you organize your workout, track progress, and connect with other fitness enthusiasts!"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:layout_editor_absoluteX="41dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
