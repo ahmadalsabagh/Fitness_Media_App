@@ -73,25 +73,6 @@ public class PostsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showAlertDialog();
-//                final Map<String, Object> posts = new HashMap<>();
-//                TextView postContentToUpload = findViewById(R.id.txtPostContent);
-//                postContentString = postContentToUpload.getText().toString();
-//                posts.put("content", postContentString);
-//
-//                db.collection("posts")
-//                        .add(posts)
-//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Log.d(TAG, "Document added with ID" + documentReference.getId());
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Log.w(TAG, "Error adding document", e);
-//                            }
-//                        });
             }
         });
 

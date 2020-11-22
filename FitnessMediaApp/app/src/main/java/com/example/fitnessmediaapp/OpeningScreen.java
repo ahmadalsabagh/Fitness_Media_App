@@ -13,7 +13,7 @@ public class OpeningScreen extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_opening_screen);
         Button register = findViewById(R.id.registerBtn);
         Button login = findViewById(R.id.loginBtn);
 

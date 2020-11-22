@@ -12,6 +12,7 @@
         <!-- Activities -->
         <activity android:name=".StepCounter"> <!-- This is supposed to be .OpeningScreen -->
                                                 <!--  Use ".StepCounter" for testing          -->
+                                                <!--      HomeActivity for testing      -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

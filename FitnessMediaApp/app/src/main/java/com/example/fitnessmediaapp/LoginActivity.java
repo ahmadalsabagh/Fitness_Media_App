@@ -1,11 +1,13 @@
 package com.example.fitnessmediaapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String usernameFromDatabase;
     public static String passwordFromDatabase;
     public static boolean authenticated = false;
+    UserFireBase authenticatedUser = new UserFireBase();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         final Map<String, Object> user = new HashMap<>();
         final EditText userName = findViewById(R.id.userNameTxtLogin);
         final EditText password = findViewById(R.id.passwordTxtLogin);
-        Button btnLogin = findViewById(R.id.updateUserBtn);
+        Button btnLogin = findViewById(R.id.authUserBtn);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 userNameString = userName.getText().toString();
                 passwordString = password.getText().toString();
 
@@ -85,7 +89,8 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }
                                 if (authenticated == true){
-                                    Intent intent = new Intent(getApplicationContext(), OpeningScreen.class);
+                                    System.out.println("hello");
+                                    Intent intent = new Intent(getApplicationContext(), StepCounter.class);
                                     startActivity(intent);
                                 }
                             }
