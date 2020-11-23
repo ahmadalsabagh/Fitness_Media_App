@@ -76,10 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                                         passwordFromDatabase = x.getString("password");
                                         usernameFromDatabase = x.getString("username");
 
-                                        System.out.println("First Name: " + firstNameFromDatabase);
-                                        System.out.println("Last Name: " + lastNameFromDatabase);
-                                        System.out.println("Password: " + passwordFromDatabase);
-                                        System.out.println("username: " + usernameFromDatabase);
+//                                        System.out.println("First Name: " + firstNameFromDatabase);
+//                                        System.out.println("Last Name: " + lastNameFromDatabase);
+//                                        System.out.println("Password: " + passwordFromDatabase);
+//                                        System.out.println("username: " + usernameFromDatabase);
 
                                         UserFireBase userData = new UserFireBase(firstNameFromDatabase, lastNameFromDatabase, passwordFromDatabase, usernameFromDatabase);
 
@@ -92,14 +92,12 @@ public class LoginActivity extends AppCompatActivity {
                                 for (UserFireBase x: mUsersList){
                                     if(x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)){
                                         authenticated = true;
-                                        System.out.println("Authenticated!");
+//                                        System.out.println("Authenticated!");
                                     }
                                 }
                                 if (authenticated == true){
-                                    System.out.println("It passes the test of authentication");
-//                                    Intent intent = new Intent(getApplicationContext(), StepCounter.class);
-//                                    startActivity(intent);
-                                    Intent intent = new Intent(getApplicationContext(), PostsActivity.class);
+//                                    System.out.println("It passes the test of authentication");
+                                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     startActivity(intent);
                                 }
                             }
