@@ -43,6 +43,12 @@ public class AccountSettings extends AppCompatActivity {
     public boolean validUsername = true;
     public static String usernameFromDatabase;
     public static String authorizationLevelFromDatabase;
+    public static String authorizedUsername;
+    public static String authorizedUserId;
+
+
+
+
 
     @Override
     protected void onStart() {
@@ -52,9 +58,9 @@ public class AccountSettings extends AppCompatActivity {
         final EditText lastName = findViewById(R.id.newLastNameTxt);
         final EditText userName = findViewById(R.id.newUsernameTxt);
         final EditText password = findViewById(R.id.newPasswordTxt);
-        Button btnRegister = findViewById(R.id.updateUserBtn);
+        Button btnUpdateUsername = findViewById(R.id.updateUserBtn);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        btnUpdateUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 lastNameString = lastName.getText().toString();
@@ -78,48 +84,46 @@ public class AccountSettings extends AppCompatActivity {
 //                                        System.out.println("Username input" + userNameString);
                                         System.out.println("Username From Database" + usernameFromDatabase);
                                         if(x.getString("authorizationLevel").equals("1") == true){
+                                            authorizedUserId = x.getId();
+
+//                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
 
                                             Toast toast = Toast.makeText(getApplicationContext(), "Authorized user" + usernameFromDatabase,
                                                     Toast.LENGTH_SHORT);
                                             toast.show();
+
+                                            DocumentReference docRef = FirebaseFirestore.getInstance()
+                                                    .collection("users")
+                                                    .document(authorizedUserId);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                            Map<String, Object> myMap = new HashMap<>();
+//                        myMap.put(LastN_Key, lastNameString);
+//                        myMap.put(FirstN_Key, firstNameString);
+                                            myMap.put(UserN_Key, userNameString);
+//                        myMap.put(Password_Key, passwordString);
+                                            docRef.update(myMap)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Log.d(TAG, "onSuccess: document was updated");
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.e(TAG, "onFailure: ", e);
+                                                        }
+                                                    });
                                         }
                                     }
                                 }
                             }
                         });
 
-                CountDownTimer timer = new CountDownTimer(1000, 250) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        System.out.println("Username pending for 1s");
-                    }
 
-                    @Override
-                    public void onFinish() {
-//                        DocumentReference docRef = FirebaseFirestore.getInstance()
-//                                .collection("users")
-//                                .document("wKmyn526EBQp6IFwusZP");
-//
-//                        Map<String, Object> myMap = new HashMap<>();
-//                        myMap.put(LastN_Key, lastNameString);
-//                        myMap.put(FirstN_Key, firstNameString);
-//                        myMap.put(UserN_Key, userNameString);
-//                        myMap.put(Password_Key, passwordString);
-//                        docRef.update(myMap)
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                        Log.d(TAG, "onSuccess: document was updated");
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Log.e(TAG, "onFailure: ", e);
-//                                    }
-//                                });
-                    }
-                };
+
+
+
 
 
                 //Btn lisntener
@@ -137,6 +141,7 @@ public class AccountSettings extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        userSnapshotListener.remove();
     }
 
     //Onclick functions for the menu bar

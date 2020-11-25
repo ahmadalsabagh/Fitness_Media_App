@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,9 +44,11 @@ public class LoginActivity extends AppCompatActivity {
     public static String usernameFromDatabase;
     public static String passwordFromDatabase;
     public static boolean authenticated = false;
+    public static String IdFromDatabase;
+    public static final String authorizationLevel_KEY = "authorizationLevel";
 
 
-    UserFireBase authenticatedUser = new UserFireBase();
+//    UserFireBase authenticatedUser = new UserFireBase();
 
     @Override
     protected void onStart() {
@@ -77,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                         lastNameFromDatabase = x.getString("lastName");
                                         passwordFromDatabase = x.getString("password");
                                         usernameFromDatabase = x.getString("username");
+                                        IdFromDatabase = x.getId();
 
 //                                        System.out.println("First Name: " + firstNameFromDatabase);
 //                                        System.out.println("Last Name: " + lastNameFromDatabase);
@@ -100,6 +107,27 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 if (authenticated == true){
 //                                    System.out.println("It passes the test of authentication");
+
+                                DocumentReference docRef = FirebaseFirestore.getInstance()
+                                     .collection("users")
+                                     .document(IdFromDatabase);
+
+                        //Update Authorization level of the user
+                        Map<String, Object> myMap = new HashMap<>();
+                        myMap.put(authorizationLevel_KEY, "1");
+                        docRef.update(myMap)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "onSuccess: document was updated");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e(TAG, "onFailure: ", e);
+                                    }
+                                });
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     startActivity(intent);
                                 }

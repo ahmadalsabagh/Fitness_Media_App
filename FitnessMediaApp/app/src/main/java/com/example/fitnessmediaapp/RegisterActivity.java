@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ListenerRegistration userSnapshotListener;
     public boolean validUsername = true;
     public static String usernameFromDatabase;
-    public static String getID;
+    public static String IdFromDatabase;
 
     @Override
     protected void onStart() {
@@ -81,8 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                                      List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
                                      for (DocumentSnapshot x : snapshotList) {
                                          usernameFromDatabase = x.getString("username");
-                                         getID = x.getId();
-                                         System.out.println("The document reference is: " + getID);
+                                         IdFromDatabase = x.getId();
+                                         System.out.println("The document reference is: " + IdFromDatabase);
                                          System.out.println("Username input" + userNameString);
                                          System.out.println("Username From Database" + usernameFromDatabase);
                                          if(usernameFromDatabase.equals(userNameString) == true){
@@ -99,58 +99,58 @@ public class RegisterActivity extends AppCompatActivity {
                         });
 
 
-//                CountDownTimer timer = new CountDownTimer(1000, 250) {
-//                    @Override
-//                    public void onTick(long millisUntilFinished) {
-//                        System.out.println("Username pending for 1s");
-//                    }
-//
-//                    @Override
-//                    public void onFinish() {
-//                        user.put(FirstN_Key, firstNameString);
-//                        user.put(LastN_Key, lastNameString);
-//                        user.put(UserN_Key, userNameString);
-//                        user.put(Password_Key, passwordString);
-//                        user.put(Authorization_Key, authorizationLevel);
-//
-//                        if (lastNameString.equals("") == true || firstNameString.equals("") == true ||
-//                                userNameString.equals("") == true || passwordString.equals("") == true) {
-//                            Toast toast = Toast.makeText(getApplicationContext(), "Please fill out all fields!",
+                CountDownTimer timer = new CountDownTimer(1000, 250) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        System.out.println("Username pending for 1s");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        user.put(FirstN_Key, firstNameString);
+                        user.put(LastN_Key, lastNameString);
+                        user.put(UserN_Key, userNameString);
+                        user.put(Password_Key, passwordString);
+                        user.put(Authorization_Key, authorizationLevel);
+
+                        if (lastNameString.equals("") == true || firstNameString.equals("") == true ||
+                                userNameString.equals("") == true || passwordString.equals("") == true) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Please fill out all fields!",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        if(validUsername == false){
+                            System.out.println("Username not looking good");
+                            Toast toast = Toast.makeText(getApplicationContext(), "Invalid Username",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        if(validUsername == true){
+                            System.out.println("Username Looks fine");
+//                            Toast toast = Toast.makeText(getApplicationContext(), "Username is good",
 //                                    Toast.LENGTH_SHORT);
 //                            toast.show();
-//                        }
-//                        if(validUsername == false){
-//                            System.out.println("Username not looking good");
-//                            Toast toast = Toast.makeText(getApplicationContext(), "Invalid Username",
-//                                    Toast.LENGTH_SHORT);
-//                            toast.show();
-//                        }
-//                        if(validUsername == true){
-//                            System.out.println("Username Looks fine");
-////                            Toast toast = Toast.makeText(getApplicationContext(), "Username is good",
-////                                    Toast.LENGTH_SHORT);
-////                            toast.show();
-//                            db.collection("users")
-//                                    .add(user)
-//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                        @Override
-//                                        public void onSuccess(DocumentReference documentReference) {
-//                                            Log.d(TAG, "Document added with ID" + documentReference.getId());
-//                                        }
-//                                    })
-//                                    .addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Log.w(TAG, "Error adding document", e);
-//                                        }
-//                                    });
-//                            Intent intent = new Intent(getApplicationContext(), OpeningScreen.class);
-//                            startActivity(intent);
-//                        }
-//                    }
-//                };
-//
-//                timer.start();
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "Document added with ID" + documentReference.getId());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+                            Intent intent = new Intent(getApplicationContext(), OpeningScreen.class);
+                            startActivity(intent);
+                        }
+                    }
+                };
+
+                timer.start();
 
 
 
