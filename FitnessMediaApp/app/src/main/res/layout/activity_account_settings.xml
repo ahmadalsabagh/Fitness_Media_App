@@ -7,93 +7,126 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/newFirstNameLabel"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="75dp"
-        android:text="@string/first_name"
-        android:textSize="20sp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="488dp">
 
-    <EditText
-        android:id="@+id/newFirstNameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleFirstName"
-        android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/updateUserBtn4"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="354dp" />
 
-    <TextView
-        android:id="@+id/newLastNameLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/last_name"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/newFirstNameTxt"
+            android:layout_width="150"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/sampleFirstName"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="121dp" />
 
-    <EditText
-        android:id="@+id/newLastNameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleLastName"
-        android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/updateUserBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="121dp" />
 
-    <TextView
-        android:id="@+id/newUsernameLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/newLastNameLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/last_name"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="170dp" />
 
-    <EditText
-        android:id="@+id/newUsernameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleUsername"
-        android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/newLastNameTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/sampleLastName"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="197dp" />
 
-    <TextView
-        android:id="@+id/newPasswordLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/updateUserBtn2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="197dp" />
 
-    <EditText
-        android:id="@+id/newPasswordTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/samplePassword"
-        android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/newUsernameLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="248dp" />
+
+        <EditText
+            android:id="@+id/newUsernameTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/sampleUsername"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="277dp" />
+
+        <Button
+            android:id="@+id/updateUserBtn3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            tools:layout_editor_absoluteX="213dp"
+            tools:layout_editor_absoluteY="279dp" />
+
+        <TextView
+            android:id="@+id/newPasswordLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="328dp" />
+
+        <EditText
+            android:id="@+id/newPasswordTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/samplePassword"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="354dp" />
+
+        <TextView
+            android:id="@+id/newFirstNameLabel"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:text="@string/first_name"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        style="?android:attr/buttonBarStyle">
-
-        <Button
-            android:id="@+id/updateUserBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/update"
-            />
-
-        <Button
-            android:id="@+id/clearFormBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/clear"
-            />
-    </LinearLayout>
+        style="?android:attr/buttonBarStyle"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
