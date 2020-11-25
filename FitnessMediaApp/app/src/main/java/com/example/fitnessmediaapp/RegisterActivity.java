@@ -1,6 +1,8 @@
 package com.example.fitnessmediaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static String passwordString;
     public static String authorizationLevel;
     private ListenerRegistration userSnapshotListener;
-    public static boolean validUsername = true;
+    public boolean validUsername = true;
     public static String usernameFromDatabase;
 
     @Override
@@ -63,43 +65,102 @@ public class RegisterActivity extends AppCompatActivity {
                 userNameString = userName.getText().toString();
                 passwordString = password.getText().toString();
                 authorizationLevel = "0";
+                validUsername = true;
 
+                userSnapshotListener = FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                             @Override
+                             public void onEvent(@Nullable QuerySnapshot queryDocumentData, @Nullable FirebaseFirestoreException error) {
+                                 if (error != null) {
+                                     Log.e(TAG, "onEvent: ", error);
+                                     return;
+                                 }
+                                 if (queryDocumentData != null) {
+                                     List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
+                                     for (DocumentSnapshot x : snapshotList) {
+                                         usernameFromDatabase = x.getString("username");
+                                         System.out.println("Username input" + userNameString);
+                                         System.out.println("Username From Database" + usernameFromDatabase);
+                                         if(usernameFromDatabase.equals(userNameString) == true){
+                                             validUsername = false;
 
-
-
-                                user.put(FirstN_Key, firstNameString);
-                                user.put(LastN_Key, lastNameString);
-                                user.put(UserN_Key, userNameString);
-                                user.put(Password_Key, passwordString);
-                                user.put(Authorization_Key, authorizationLevel);
-
-                                if (lastNameString.equals("") == true || firstNameString.equals("") == true ||
-                                        userNameString.equals("") == true || passwordString.equals("") == true) {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "Please fill out all fields!",
-                                            Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-//                else if()
-
-                                db.collection("users")
-                                        .add(user)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d(TAG, "Document added with ID" + documentReference.getId());
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error adding document", e);
-                                            }
-                                        });
-                            }
+//                                             System.out.println("---------------------------");
+//                                             System.out.println("----------------------------");
+//                                             System.out.println("----------------------------");
+//                                             System.out.println("we have a duplicate username!!!!");
+                                         }
+                                     }
+                                 }
+                             }
                         });
 
 
+                CountDownTimer timer = new CountDownTimer(1000, 250) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        System.out.println("Username pending for 1s");
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        user.put(FirstN_Key, firstNameString);
+                        user.put(LastN_Key, lastNameString);
+                        user.put(UserN_Key, userNameString);
+                        user.put(Password_Key, passwordString);
+                        user.put(Authorization_Key, authorizationLevel);
+
+                        if (lastNameString.equals("") == true || firstNameString.equals("") == true ||
+                                userNameString.equals("") == true || passwordString.equals("") == true) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Please fill out all fields!",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        if(validUsername == false){
+                            System.out.println("Username not looking good");
+                            Toast toast = Toast.makeText(getApplicationContext(), "Invalid Username",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        if(validUsername == true){
+                            System.out.println("Username Looks fine");
+//                            Toast toast = Toast.makeText(getApplicationContext(), "Username is good",
+//                                    Toast.LENGTH_SHORT);
+//                            toast.show();
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "Document added with ID" + documentReference.getId());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+                            Intent intent = new Intent(getApplicationContext(), OpeningScreen.class);
+                            startActivity(intent);
+                        }
+                    }
+                };
+
+                timer.start();
+
+
+
+
+
+
+
+                //btn click listener and onstart
+                    }
+                });
             }
+
+
 
 
     @Override
@@ -107,13 +168,17 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
-
 //         Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Register");  // provide compatibility to all the versions
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        userSnapshotListener.remove();
     }
 }
