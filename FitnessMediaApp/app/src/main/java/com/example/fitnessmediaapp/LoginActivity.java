@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                                     List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
                                     for(DocumentSnapshot x : snapshotList){
 
-
                                         firstNameFromDatabase = x.getString("firstName");
                                         lastNameFromDatabase = x.getString("lastName");
                                         passwordFromDatabase = x.getString("password");
@@ -95,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                 for (UserFireBase x: mUsersList){
                                     if(x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)){
                                         authenticated = true;
+
 //                                        System.out.println("Authenticated!");
                                     }
                                 }
