@@ -40,12 +40,15 @@ public class LoginActivity extends AppCompatActivity {
     public static String usernameFromDatabase;
     public static String passwordFromDatabase;
     public static boolean authenticated = false;
+
+
     UserFireBase authenticatedUser = new UserFireBase();
 
     @Override
     protected void onStart() {
         super.onStart();
         final Map<String, Object> user = new HashMap<>();
+
         final EditText userName = findViewById(R.id.userNameTxtLogin);
         final EditText password = findViewById(R.id.passwordTxtLogin);
         Button btnLogin = findViewById(R.id.authUserBtn);
