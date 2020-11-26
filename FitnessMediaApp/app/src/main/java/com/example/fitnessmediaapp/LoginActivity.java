@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+    DatabaseHelper mDatabaseHelper;
     private final LinkedList<UserFireBase> mUsersList = new LinkedList<>();
 
     private ListenerRegistration userSnapshotListener;
@@ -53,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        mDatabaseHelper = new DatabaseHelper(this);
         final Map<String, Object> user = new HashMap<>();
-
         final EditText userName = findViewById(R.id.userNameTxtLogin);
         final EditText password = findViewById(R.id.passwordTxtLogin);
         Button btnLogin = findViewById(R.id.authUserBtn);
@@ -91,6 +93,10 @@ public class LoginActivity extends AppCompatActivity {
 //                                        System.out.println("username: " + usernameFromDatabase);
 
                                         UserFireBase userData = new UserFireBase(firstNameFromDatabase, lastNameFromDatabase, passwordFromDatabase, usernameFromDatabase);
+
+                                        //SQLITE add user test
+                                        boolean insertData = mDatabaseHelper.createUser(firstNameFromDatabase,lastNameFromDatabase,passwordFromDatabase,usernameFromDatabase);
+
 
                                         mUsersList.addLast(userData);
                                     }
