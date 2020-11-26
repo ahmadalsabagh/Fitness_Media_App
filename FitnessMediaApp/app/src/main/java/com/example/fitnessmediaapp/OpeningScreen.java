@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class OpeningScreen extends AppCompatActivity  {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "OpeningScreen";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

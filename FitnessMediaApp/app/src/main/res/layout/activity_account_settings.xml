@@ -7,93 +7,201 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/newFirstNameLabel"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="75dp"
-        android:text="@string/first_name"
-        android:textSize="20sp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="488dp">
 
-    <EditText
-        android:id="@+id/newFirstNameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleFirstName"
-        android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/updatePasswordBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:layout_marginBottom="82dp"
+            android:text="@string/update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newPasswordTxt"
+            app:layout_constraintTop_toBottomOf="@+id/newPasswordLabel" />
 
-    <TextView
-        android:id="@+id/newLastNameLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/last_name"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/newFirstNameTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:ems="10"
+            android:hint="@string/sampleFirstName"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/newLastNameLabel"
+            app:layout_constraintEnd_toStartOf="@+id/updateFirstNameBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newFirstNameLabel" />
 
-    <EditText
-        android:id="@+id/newLastNameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleLastName"
-        android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/updateFirstNameBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:layout_marginBottom="1dp"
+            android:text="@string/update"
+            app:layout_constraintBottom_toTopOf="@+id/newLastNameLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newFirstNameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/newFirstNameLabel" />
 
-    <TextView
-        android:id="@+id/newUsernameLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/newLastNameLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:text="@string/last_name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/newLastNameTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newFirstNameTxt" />
 
-    <EditText
-        android:id="@+id/newUsernameTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/sampleUsername"
-        android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/newLastNameTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:ems="10"
+            android:hint="@string/sampleLastName"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/newUsernameLabel"
+            app:layout_constraintEnd_toStartOf="@+id/updateLastNameBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newLastNameLabel" />
 
-    <TextView
-        android:id="@+id/newPasswordLabel"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/updateLastNameBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/update"
+            app:layout_constraintBottom_toTopOf="@+id/newUsernameLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newLastNameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/newLastNameLabel" />
 
-    <EditText
-        android:id="@+id/newPasswordTxt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/samplePassword"
-        android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/newUsernameLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/username"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/newUsernameTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newLastNameTxt" />
+
+        <EditText
+            android:id="@+id/newUsernameTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="1dp"
+            android:ems="10"
+            android:hint="@string/sampleUsername"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/newPasswordLabel"
+            app:layout_constraintEnd_toStartOf="@+id/updateUsernameBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
+
+        <Button
+            android:id="@+id/updateUsernameBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/update"
+            app:layout_constraintBottom_toTopOf="@+id/newPasswordLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newUsernameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/newUsernameLabel" />
+
+        <TextView
+            android:id="@+id/newPasswordLabel"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
+            android:text="@string/password"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newUsernameTxt" />
+
+        <EditText
+            android:id="@+id/newPasswordTxt"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="81dp"
+            android:ems="10"
+            android:hint="@string/samplePassword"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/updatePasswordBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newPasswordLabel" />
+
+        <TextView
+            android:id="@+id/newFirstNameLabel"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="91dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:text="@string/first_name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/newFirstNameTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        style="?android:attr/buttonBarStyle">
-
-        <Button
-            android:id="@+id/updateUserBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/update"
-            />
-
-        <Button
-            android:id="@+id/clearFormBtn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/clear"
-            />
-    </LinearLayout>
+        style="?android:attr/buttonBarStyle"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
