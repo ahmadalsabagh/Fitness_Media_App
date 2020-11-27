@@ -2,6 +2,7 @@ package com.example.fitnessmediaapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean authenticated = false;
     public static String IdFromDatabase;
     public static final String authorizationLevel_KEY = "authorizationLevel";
+    public static String authorizedUserName;
+    DatabaseHelper myDB;
 
 
 //    UserFireBase authenticatedUser = new UserFireBase();
@@ -57,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText userName = findViewById(R.id.userNameTxtLogin);
         final EditText password = findViewById(R.id.passwordTxtLogin);
+        authorizedUserName="";
+
         Button btnLogin = findViewById(R.id.authUserBtn);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                 for (UserFireBase x : mUsersList) {
                                     if (x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)) {
                                         authenticated = true;
+                                        authorizedUserName = x.getUsername();
 
 //                                        System.out.println("Authenticated!");
                                     }
@@ -108,26 +115,29 @@ public class LoginActivity extends AppCompatActivity {
                                 if (authenticated == true) {
 //                                    System.out.println("It passes the test of authentication");
 
-                                    DocumentReference docRef = FirebaseFirestore.getInstance()
-                                            .collection("users")
-                                            .document(IdFromDatabase);
+                                    myDB = new DatabaseHelper(getApplicationContext());
+                                    boolean delete = myDB.deleteData();
+                                    boolean newUser = myDB.createUser("Daniel", "Lodge", "123", authorizedUserName);
+                                    System.out.println("Status: " + newUser);
+                                    Cursor data = myDB.getData();
+                                    ArrayList<String> listData = new ArrayList<>();
+                                    while(data.moveToNext()){
+                                        listData.add(data.getString(4));
+                                    }
 
+                                    /*
+                                     myDB = new DatabaseHelper(getApplicationContext());
+                                     Cursor data = myDB.getData();
+                                     ArrayList<String> listData = new ArrayList<>();
+                                    while(data.moveToNext()){
+                                        listData.add(data.getString(4));
+                                    }
+                                    System.out.println("the List data:" + listData.toString());
+                                     */
+
+                                    System.out.println("the List data:" + listData.toString());
                                     //Update Authorization level of the user
-                                    Map<String, Object> myMap = new HashMap<>();
-                                    myMap.put(authorizationLevel_KEY, "1");
-                                    docRef.update(myMap)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Log.d(TAG, "onSuccess: document was updated");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.e(TAG, "onFailure: ", e);
-                                                }
-                                            });
+//
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     startActivity(intent);
                                 }

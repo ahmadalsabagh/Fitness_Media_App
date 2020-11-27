@@ -1,6 +1,7 @@
 package com.example.fitnessmediaapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,16 +36,17 @@ public class AccountSettings extends AppCompatActivity {
     public static final String UserN_Key = "username";
     public static final String Password_Key = "password";
 //    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public static String firstNameString;
-    public static String lastNameString;
-    public static String userNameString;
-    public static String passwordString;
+    public static String firstNameFromInput;
+    public static String lastNameFromInput;
+    public static String usernameFromInput;
+    public static String passwordFromInput;
     private ListenerRegistration userSnapshotListener;
     public boolean validUsername = true;
     public static String usernameFromDatabase;
     public static String authorizationLevelFromDatabase;
-    public static String authorizedUsername;
-    public static String authorizedUserId;
+    public static String authorizedUsernameFromSql;
+    public static String authorizedUserIdInFirestore;
+    DatabaseHelper myDB;
 
 
 
@@ -65,10 +68,19 @@ public class AccountSettings extends AppCompatActivity {
         btnUpdateUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lastNameString = lastName.getText().toString();
-                firstNameString = firstName.getText().toString();
-                userNameString = userName.getText().toString();
-                passwordString = password.getText().toString();
+                lastNameFromInput = lastName.getText().toString();
+                firstNameFromInput = firstName.getText().toString();
+                usernameFromInput = userName.getText().toString();
+                passwordFromInput = password.getText().toString();
+
+                myDB = new DatabaseHelper(getApplicationContext());
+                Cursor data = myDB.getData();
+                ArrayList<String> listData = new ArrayList<>();
+                while(data.moveToNext()){
+                    listData.add(data.getString(4));
+                }
+                authorizedUsernameFromSql = listData.toString();
+                System.out.println("From Accountsettings the List data:" + listData.toString());
 
                 userSnapshotListener = FirebaseFirestore.getInstance()
                         .collection("users")
@@ -85,10 +97,10 @@ public class AccountSettings extends AppCompatActivity {
                                         usernameFromDatabase = x.getString("username");
 //                                        System.out.println("Username input" + userNameString);
                                         System.out.println("Username From Database" + usernameFromDatabase);
-                                        if(x.getString("authorizationLevel").equals("1") == true){
-                                            authorizedUserId = x.getId();
+                                        if(x.getString("username").equals(authorizedUsernameFromSql) == true){
+                                            authorizedUserIdInFirestore = x.getId();
 
-//                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserIdInFirestore);
 
                                             Toast toast = Toast.makeText(getApplicationContext(), "Authorized user" + usernameFromDatabase,
                                                     Toast.LENGTH_SHORT);
@@ -96,10 +108,10 @@ public class AccountSettings extends AppCompatActivity {
 
                                             DocumentReference docRef = FirebaseFirestore.getInstance()
                                                     .collection("users")
-                                                    .document(authorizedUserId);
-                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                                    .document(authorizedUserIdInFirestore);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserIdInFirestore);
                                             Map<String, Object> myMap = new HashMap<>();
-                                            myMap.put(UserN_Key, userNameString);
+                                            myMap.put(UserN_Key, usernameFromInput);
                                             docRef.update(myMap)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
@@ -124,7 +136,7 @@ public class AccountSettings extends AppCompatActivity {
         btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                passwordString = password.getText().toString();
+                passwordFromInput = password.getText().toString();
 
                 userSnapshotListener = FirebaseFirestore.getInstance()
                         .collection("users")
@@ -142,7 +154,7 @@ public class AccountSettings extends AppCompatActivity {
 //                                        System.out.println("Username input" + userNameString);
                                         System.out.println("Username From Database" + usernameFromDatabase);
                                         if(x.getString("authorizationLevel").equals("1") == true){
-                                            authorizedUserId = x.getId();
+                                            authorizedUserIdInFirestore = x.getId();
 
 //                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
 
@@ -152,10 +164,10 @@ public class AccountSettings extends AppCompatActivity {
 
                                             DocumentReference docRef = FirebaseFirestore.getInstance()
                                                     .collection("users")
-                                                    .document(authorizedUserId);
-                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                                    .document(authorizedUserIdInFirestore);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserIdInFirestore);
                                             Map<String, Object> myMap = new HashMap<>();
-                                            myMap.put(Password_Key, passwordString);
+                                            myMap.put(Password_Key, passwordFromInput);
                                             docRef.update(myMap)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
@@ -180,7 +192,7 @@ public class AccountSettings extends AppCompatActivity {
         btnUpdateFirstName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstNameString = firstName.getText().toString();
+                firstNameFromInput = firstName.getText().toString();
                 userSnapshotListener = FirebaseFirestore.getInstance()
                         .collection("users")
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -197,7 +209,7 @@ public class AccountSettings extends AppCompatActivity {
 //                                        System.out.println("Username input" + userNameString);
                                         System.out.println("Username From Database" + usernameFromDatabase);
                                         if(x.getString("authorizationLevel").equals("1") == true){
-                                            authorizedUserId = x.getId();
+                                            authorizedUserIdInFirestore = x.getId();
 
 //                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
 
@@ -207,10 +219,10 @@ public class AccountSettings extends AppCompatActivity {
 
                                             DocumentReference docRef = FirebaseFirestore.getInstance()
                                                     .collection("users")
-                                                    .document(authorizedUserId);
-                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                                    .document(authorizedUserIdInFirestore);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserIdInFirestore);
                                             Map<String, Object> myMap = new HashMap<>();
-                                            myMap.put(FirstN_Key, firstNameString);
+                                            myMap.put(FirstN_Key, firstNameFromInput);
                                             docRef.update(myMap)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override
@@ -235,10 +247,10 @@ public class AccountSettings extends AppCompatActivity {
         btnUpdateLastName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lastNameString = lastName.getText().toString();
-                firstNameString = firstName.getText().toString();
-                userNameString = userName.getText().toString();
-                passwordString = password.getText().toString();
+                lastNameFromInput = lastName.getText().toString();
+                firstNameFromInput = firstName.getText().toString();
+                usernameFromInput = userName.getText().toString();
+                passwordFromInput = password.getText().toString();
 
                 userSnapshotListener = FirebaseFirestore.getInstance()
                         .collection("users")
@@ -256,7 +268,7 @@ public class AccountSettings extends AppCompatActivity {
 //                                        System.out.println("Username input" + userNameString);
                                         System.out.println("Username From Database" + usernameFromDatabase);
                                         if(x.getString("authorizationLevel").equals("1") == true){
-                                            authorizedUserId = x.getId();
+                                            authorizedUserIdInFirestore = x.getId();
 
 //                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
 
@@ -266,10 +278,10 @@ public class AccountSettings extends AppCompatActivity {
 
                                             DocumentReference docRef = FirebaseFirestore.getInstance()
                                                     .collection("users")
-                                                    .document(authorizedUserId);
-                                            System.out.println("The Authorized UserId is: " + authorizedUserId);
+                                                    .document(authorizedUserIdInFirestore);
+                                            System.out.println("The Authorized UserId is: " + authorizedUserIdInFirestore);
                                             Map<String, Object> myMap = new HashMap<>();
-                                            myMap.put(LastN_Key, lastNameString);
+                                            myMap.put(LastN_Key, lastNameFromInput);
                                             docRef.update(myMap)
                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                         @Override

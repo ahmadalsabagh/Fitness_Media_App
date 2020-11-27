@@ -11,28 +11,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
-    DatabaseHelper myDB;
-    public static String databaseInfo;
+//    DatabaseHelper myDB;
+//    public static String databaseInfo;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        myDB = new DatabaseHelper(this);
-        boolean delete = myDB.deleteData();
-        boolean newUser = myDB.createUser("Daniel", "Lodge", "123", "dlodge");
-        System.out.println("Status: " + newUser);
-        Cursor data = myDB.getData();
-
-
-
-
-        ArrayList<String> listData = new ArrayList<>();
-        while(data.moveToNext()){
-            listData.add(data.getString(4));
-        }
-
-        System.out.println("the List data:" + listData.toString());
+//        myDB = new DatabaseHelper(this);
+//        boolean delete = myDB.deleteData();
+//        boolean newUser = myDB.createUser("Daniel", "Lodge", "123", "dlodge");
+//        System.out.println("Status: " + newUser);
+//        Cursor data = myDB.getData();
+//
+//
+//
+//
+//        ArrayList<String> listData = new ArrayList<>();
+//        while(data.moveToNext()){
+//            listData.add(data.getString(4));
+//        }
+//
+//        System.out.println("the List data:" + listData.toString());
 
         /*
         The docs for SQLiteDatabase.query() say that the query methods return:
