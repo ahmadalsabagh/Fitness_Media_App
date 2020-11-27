@@ -1,6 +1,5 @@
 package com.example.fitnessmediaapp;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,9 @@ public class PostsAdapter extends FirestoreRecyclerAdapter <Post, PostsAdapter.P
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull Post model) {
         holder.txtContentFromPost.setText(model.getContent());
+//        holder.txtLocationFromPost.setText(model.getLocation());
+//        holder.txtUsernameFromPost.setText(model.getUsername());
+
     }
 
     @NonNull
@@ -41,10 +43,15 @@ public class PostsAdapter extends FirestoreRecyclerAdapter <Post, PostsAdapter.P
     class PostViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtContentFromPost;
+//        TextView txtLocationFromPost;
+//        TextView txtUsernameFromPost;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             txtContentFromPost = itemView.findViewById(R.id.txtPostContent);
+//            txtLocationFromPost = itemView.findViewById(R.id.txtPostLocation);
+//            txtUsernameFromPost = itemView.findViewById(R.id.txtPostUsername);
+
 
         }
     }

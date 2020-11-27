@@ -52,7 +52,7 @@ public class PostsActivity extends AppCompatActivity {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    private DocumentReference postRef = db.document("posts/myPost");
+    //    private DocumentReference postRef = db.document("posts/myPost");
     private static final String TAG = "PostsActivity";
     public static String postContent;
     public static String postLocation;
@@ -80,11 +80,12 @@ public class PostsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewPosts);
 
         Button btnPost = findViewById(R.id.createPostBtn);
+//        getCoordinates();
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCoordinates();
+
                 showAlertDialog();
             }
         });
@@ -102,22 +103,22 @@ public class PostsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Log.d(TAG, "onClick: " + postEditText.getText());
                         final Map<String, Object> posts = new HashMap<>();
-                posts.put("content", postEditText.getText().toString());
+                        posts.put("content", postEditText.getText().toString());
 
-                db.collection("posts")
-                        .add(posts)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "Document added with ID" + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                        db.collection("posts")
+                                .add(posts)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "Document added with ID" + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
 
                     }
                 })
@@ -132,31 +133,6 @@ public class PostsActivity extends AppCompatActivity {
             postsRecyclerViewAdapter.stopListening();
         }
     }
-
-    //----------ONCLICK for uploading posts
-//    public void uploadPost(View v){
-//        setContentView(R.layout.posts_recyclerview);
-//        final Map<String, Object> posts = new HashMap<>();
-//        EditText postContentToUpload = findViewById(R.id.txtPostContent);
-//        postContentString = postContentToUpload.getText().toString();
-//        posts.put("content", postContentString);
-//
-//        db.collection("posts")
-//                .add(posts)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(TAG, "Document added with ID" + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error adding document", e);
-//                    }
-//                });
-//
-//    }
 
     private void initRecyclerView(){
 

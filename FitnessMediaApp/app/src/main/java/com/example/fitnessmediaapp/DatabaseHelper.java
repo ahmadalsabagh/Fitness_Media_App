@@ -2,6 +2,7 @@ package com.example.fitnessmediaapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -45,4 +46,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+
+    public Cursor getData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
+    public boolean deleteData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_NAME);
+        return true;
+    }
+
+    public Cursor queryUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL5 + " FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
+
 }

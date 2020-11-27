@@ -32,8 +32,6 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-    DatabaseHelper mDatabaseHelper;
     private final LinkedList<UserFireBase> mUsersList = new LinkedList<>();
 
     private ListenerRegistration userSnapshotListener;
@@ -55,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mDatabaseHelper = new DatabaseHelper(this);
         final Map<String, Object> user = new HashMap<>();
+
         final EditText userName = findViewById(R.id.userNameTxtLogin);
         final EditText password = findViewById(R.id.passwordTxtLogin);
         Button btnLogin = findViewById(R.id.authUserBtn);
@@ -73,13 +71,13 @@ public class LoginActivity extends AppCompatActivity {
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot queryDocumentData, @Nullable FirebaseFirestoreException error) {
-                                if(error != null){
+                                if (error != null) {
                                     Log.e(TAG, "onEvent: ", error);
                                     return;
                                 }
-                                if(queryDocumentData != null){
+                                if (queryDocumentData != null) {
                                     List<DocumentSnapshot> snapshotList = queryDocumentData.getDocuments();
-                                    for(DocumentSnapshot x : snapshotList){
+                                    for (DocumentSnapshot x : snapshotList) {
 
                                         firstNameFromDatabase = x.getString("firstName");
                                         lastNameFromDatabase = x.getString("lastName");
@@ -94,46 +92,42 @@ public class LoginActivity extends AppCompatActivity {
 
                                         UserFireBase userData = new UserFireBase(firstNameFromDatabase, lastNameFromDatabase, passwordFromDatabase, usernameFromDatabase);
 
-                                        //SQLITE add user test
-                                        boolean insertData = mDatabaseHelper.createUser(firstNameFromDatabase,lastNameFromDatabase,passwordFromDatabase,usernameFromDatabase);
-
-
                                         mUsersList.addLast(userData);
                                     }
-                                } else{
+                                } else {
                                     Log.e(TAG, "onEvent: query snapshot was null");
                                 }
 
-                                for (UserFireBase x: mUsersList){
-                                    if(x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)){
+                                for (UserFireBase x : mUsersList) {
+                                    if (x.getUsername().equals(userNameString) && x.getPassword().equals(passwordString)) {
                                         authenticated = true;
 
 //                                        System.out.println("Authenticated!");
                                     }
                                 }
-                                if (authenticated == true){
+                                if (authenticated == true) {
 //                                    System.out.println("It passes the test of authentication");
 
-                                DocumentReference docRef = FirebaseFirestore.getInstance()
-                                     .collection("users")
-                                     .document(IdFromDatabase);
+                                    DocumentReference docRef = FirebaseFirestore.getInstance()
+                                            .collection("users")
+                                            .document(IdFromDatabase);
 
-                        //Update Authorization level of the user
-                        Map<String, Object> myMap = new HashMap<>();
-                        myMap.put(authorizationLevel_KEY, "1");
-                        docRef.update(myMap)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG, "onSuccess: document was updated");
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.e(TAG, "onFailure: ", e);
-                                    }
-                                });
+                                    //Update Authorization level of the user
+                                    Map<String, Object> myMap = new HashMap<>();
+                                    myMap.put(authorizationLevel_KEY, "1");
+                                    docRef.update(myMap)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Log.d(TAG, "onSuccess: document was updated");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.e(TAG, "onFailure: ", e);
+                                                }
+                                            });
                                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     startActivity(intent);
                                 }
