@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
 
 //    UserFireBase authenticatedUser = new UserFireBase();
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -120,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                     boolean newUser = myDB.createUser("Daniel", "Lodge", "123", authorizedUserName);
                                     System.out.println("Status: " + newUser);
                                     Cursor data = myDB.getData();
+
                                     ArrayList<String> listData = new ArrayList<>();
                                     while(data.moveToNext()){
                                         listData.add(data.getString(4));
@@ -161,10 +164,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onStop() {
         super.onStop();
         userSnapshotListener.remove();
+        myDB.close();
     }
 }
 
