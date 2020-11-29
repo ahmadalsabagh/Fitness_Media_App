@@ -68,7 +68,7 @@ public class PostsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         initRecyclerView();
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
 
@@ -78,9 +78,11 @@ public class PostsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posts_recyclerview);
         recyclerView = findViewById(R.id.recyclerViewPosts);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         Button btnPost = findViewById(R.id.createPostBtn);
-//        getCoordinates();
+        getCoordinates();
+
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
