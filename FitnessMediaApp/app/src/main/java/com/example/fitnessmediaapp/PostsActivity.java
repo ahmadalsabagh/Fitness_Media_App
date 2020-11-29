@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -37,6 +38,11 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,23 +58,61 @@ public class PostsActivity extends AppCompatActivity {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    private DocumentReference postRef = db.document("posts/myPost");
+    //    private DocumentReference postRef = db.document("posts/myPost");
     private static final String TAG = "PostsActivity";
     public static String postContent;
     public static String postLocation;
     public static String postTime;
     public static String postUsername;
     public static String postContentString;
+    public static String countryFromCoords;
+    public static String countryFromFusedLocation;
+    public static String postCountryName;
     //    public static String toast_message = "heloooooooooooo";
     //Registering the listener
     private ListenerRegistration snapShotActivationController;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    DatabaseHelper myDB;
+    public static String authorizedUsernameFromSql;
+
 
     @Override
     protected void onStart() {
         super.onStart();
         initRecyclerView();
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        myDB = new DatabaseHelper(getApplicationContext());
+        Cursor data = myDB.getData();
+        ArrayList<String> listData = new ArrayList<>();
+        while (data.moveToNext()) {
+            listData.add(data.getString(4));
+        }
+        authorizedUsernameFromSql = listData.get(0);
+        System.out.println("From Accountsettings the List data:" + authorizedUsernameFromSql);
+
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        postTime = simpleDateFormat.format(calendar.getTime());
+        System.out.println(postTime);
+//        Date currentTime = Calendar.getInstance().getTime();
+//        String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
+//
+//        System.out.println("The time is" + formattedDate);
+//        String[] splitDate = currentTime.split(" ");
+
+        getCoordinates();
+        System.out.println("The country name is: " + postCountryName);
+        Button btnPost = findViewById(R.id.createPostBtn);
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showAlertDialog();
+            }
+        });
+
+
+
     }
 
 
@@ -78,16 +122,13 @@ public class PostsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posts_recyclerview);
         recyclerView = findViewById(R.id.recyclerViewPosts);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Button btnPost = findViewById(R.id.createPostBtn);
 
-        btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCoordinates();
-                showAlertDialog();
-            }
-        });
+
+
+
+
 
 
     }
@@ -102,22 +143,26 @@ public class PostsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Log.d(TAG, "onClick: " + postEditText.getText());
                         final Map<String, Object> posts = new HashMap<>();
-                posts.put("content", postEditText.getText().toString());
+                        posts.put("content", postEditText.getText().toString());
+                        posts.put("location", postCountryName);
+                        posts.put("time", postTime);
+                        posts.put("username", authorizedUsernameFromSql);
 
-                db.collection("posts")
-                        .add(posts)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "Document added with ID" + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+
+                        db.collection("posts")
+                                .add(posts)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "Document added with ID" + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
 
                     }
                 })
@@ -132,31 +177,6 @@ public class PostsActivity extends AppCompatActivity {
             postsRecyclerViewAdapter.stopListening();
         }
     }
-
-    //----------ONCLICK for uploading posts
-//    public void uploadPost(View v){
-//        setContentView(R.layout.posts_recyclerview);
-//        final Map<String, Object> posts = new HashMap<>();
-//        EditText postContentToUpload = findViewById(R.id.txtPostContent);
-//        postContentString = postContentToUpload.getText().toString();
-//        posts.put("content", postContentString);
-//
-//        db.collection("posts")
-//                .add(posts)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(TAG, "Document added with ID" + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error adding document", e);
-//                    }
-//                });
-//
-//    }
 
     private void initRecyclerView(){
 
@@ -224,11 +244,11 @@ public class PostsActivity extends AppCompatActivity {
             List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
 
             if (addresses.size() > 0) {
-                String countryName = addresses.get(0).getCountryName();
+                postCountryName = addresses.get(0).getCountryName();
 
                 //Set location textview to countryName!!!
-                Toast.makeText(this, countryName, Toast.LENGTH_LONG).show();
-                System.out.println(countryName);
+                Toast.makeText(this, postCountryName, Toast.LENGTH_LONG).show();
+                System.out.println(postCountryName);
             }
         }catch (Exception e){
             Toast.makeText(this, "No Location Name Found", Toast.LENGTH_LONG).show();
