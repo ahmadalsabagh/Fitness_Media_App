@@ -338,8 +338,12 @@ public class AccountSettings extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        userSnapshotListener.remove();
-        myDB.close();
+        if(userSnapshotListener != null){
+            userSnapshotListener.remove();
+        }
+        if(myDB != null){
+            myDB.close();
+        }
     }
 
     //Onclick functions for the menu bar
