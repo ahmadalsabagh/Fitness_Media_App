@@ -182,6 +182,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        userSnapshotListener.remove();
+        if(userSnapshotListener != null){
+            userSnapshotListener.remove();
+        }
     }
 }
