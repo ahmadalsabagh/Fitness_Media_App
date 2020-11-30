@@ -1,5 +1,6 @@
 package com.example.fitnessmediaapp;
 
+import android.app.Instrumentation;
 import android.view.View;
 
 import androidx.test.rule.ActivityTestRule;
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.*;
 
 public class OpeningScreenTest {
@@ -16,8 +18,6 @@ public class OpeningScreenTest {
     @Rule
     //Enables launching of the activity
     public ActivityTestRule<OpeningScreen> mActivityTestRule = new ActivityTestRule<OpeningScreen>(OpeningScreen.class);
-
-    // a reference to the activity
     private OpeningScreen mActivity = null;
 
     @Before
