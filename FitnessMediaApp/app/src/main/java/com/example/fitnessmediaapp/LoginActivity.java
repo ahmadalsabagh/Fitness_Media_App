@@ -168,8 +168,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        userSnapshotListener.remove();
-        myDB.close();
+        if(userSnapshotListener != null){
+            userSnapshotListener.remove();
+        }
+        if(myDB != null){
+            myDB.close();
+        }
     }
 }
 
