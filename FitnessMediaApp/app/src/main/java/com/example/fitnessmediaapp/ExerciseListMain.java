@@ -28,27 +28,27 @@ public class ExerciseListMain extends AppCompatActivity {
 
         mExerciseList.add("Dumbbell Fly");
         mDescriptionList.add("An exercise that focuses on the chest");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.dfly);
 
         mExerciseList.add("Chest Press");
         mDescriptionList.add("An exercise that focuses on the chest");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.cpress);
 
         mExerciseList.add("Reverse Fly");
         mDescriptionList.add("An exercise that focuses on the rear delts");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.rfly);
 
         mExerciseList.add("Shoulder press");
         mDescriptionList.add("An exercise that focuses on the front delts");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.spress);
 
         mExerciseList.add("Lateral raises");
         mDescriptionList.add("An exercise that focuses on the side delts");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.lateral);
 
         mExerciseList.add("Front raises");
         mDescriptionList.add("An exercise that focuses on the front delts");
-        mImageList.add(R.drawable.bla);
+        mImageList.add(R.drawable.fraises);
 
 
 

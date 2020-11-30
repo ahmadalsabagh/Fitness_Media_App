@@ -42,7 +42,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     @Override
     public void onBindViewHolder(@NonNull ExerciseListAdapter.ExerciseListHolder holder, final int position) {
         String mCurrent = mExerciseList.get(position);
-        int imageCurrent = mImageList.get(position);
+        final int imageCurrent = mImageList.get(position);
         final String descriptionCurrent = mDescriptionList.get(position);
         holder.wordItemView.setText(mCurrent);
         //holder.imageItemView.setImageResource(R.drawable.barbell);

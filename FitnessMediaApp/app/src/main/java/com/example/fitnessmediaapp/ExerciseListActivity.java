@@ -29,12 +29,18 @@ public class ExerciseListActivity extends AppCompatActivity {
     private void getIncomingIntent() {
         if (getIntent().hasExtra("exercise_description")) {
             String exerciseDescription = getIntent().getStringExtra("exercise_description");
+            String exerciseImage = getIntent().getStringExtra("exercise_image");
             setDescription(exerciseDescription);
+            //setImage(exerciseImage);
         }
     }
 
     private void setDescription(String exerciseDescription) {
         TextView recipeText = findViewById(R.id.exercise_description);
         recipeText.setText(exerciseDescription);
+    }
+
+    private void setImage() {
+
     }
 }
